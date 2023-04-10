@@ -1,0 +1,58 @@
+dim_country
+-
+country_id INT PK
+country_name varchar(100)
+location varchar(100)
+
+
+
+dim_dealer
+-
+dealer_id int PK
+country_id int FK >- dim_country.country_id
+dealer_name varchar(100)
+dealer_contact varchar(100)
+
+
+
+dim_branch
+-
+branch_id int PK
+name varchar(100)
+address varchar(100)
+country varchar(100)
+
+
+
+dim_date
+-
+date_id int PK
+date date
+
+
+
+dim_variant
+-
+variant_id int PK
+variant_name varchar(100)
+fuel_type varchar(100)
+
+
+
+dim_product
+-
+product_id int PK
+model_id int
+product_name varchar(100)
+variant_id int FK >- dim_variant.variant_id
+
+
+
+fact_revenue
+-
+dealer_id int PK FK >- dim_dealer.dealer_id
+date_id int PK FK >- dim_date.date_id
+product_id int PK FK >- dim_product.product_id
+branch_id int PK FK >- dim_branch.branch_id
+units_sold int
+revenue decimal(8,2)
